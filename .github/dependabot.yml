@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Dependabot version updates: GitHub opens pull requests when dependencies have new
+# releases. Security updates (PRs for known vulnerabilities) are switched on separately
+# under Settings > Code security.
+version: 2
+updates:
+  # JavaScript: the frontend (Vue, @nextcloud/*) and the build and test tooling
+  # (Vite, Playwright). package-lock.json is committed, so these PRs update it too.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    groups:
+      # Minor and patch releases should be drop-in: one combined PR a week.
+      # Major releases are not grouped and arrive as one PR each, because they
+      # usually need code changes.
+      npm-minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+
+  # PHP: development tools only (PHPUnit, Psalm, php-cs-fixer rules, the OCP
+  # interfaces); the app has no runtime Composer dependencies. composer.lock is not
+  # committed, so Dependabot only proposes releases outside the ranges in
+  # composer.json, i.e. new major versions.
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    ignore:
+      # Pinned on purpose to the lowest supported Nextcloud (34). Move it together
+      # with <nextcloud min-version> in appinfo/info.xml.
+      - dependency-name: nextcloud/ocp
+      # Nextcloud 34 ships Symfony Console 6.4, and the occ commands run against it.
+      - dependency-name: symfony/console
+        update-types:
+          - version-update:semver-major
+      # PHPUnit 12 requires PHP 8.3; the app still supports PHP 8.2.
+      - dependency-name: phpunit/phpunit
+        update-types:
+          - version-update:semver-major
