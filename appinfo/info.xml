@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+  - SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+	<id>announcement_banner</id>
+	<name>Announcement Banner</name>
+	<summary>Show admin announcements as a banner on the Dashboard</summary>
+	<description><![CDATA[Tell your users about updates, maintenance windows and other news where they
+will see it: as a banner at the top of the Dashboard, Nextcloud's home page.
+
+- Admins write announcements under **Administration settings > Announcement Banner**:
+  a title, an optional message, a type (information, success, warning, error) and an
+  optional "Learn more" link.
+- Schedule them: a banner can appear from a start date and disappear after an end date.
+- Users close a banner once and it stays closed for them; announcements that must stay
+  visible (an upcoming maintenance window, for example) can be made non-dismissible.
+- Hand the management page to a group of non-admins under **Administration privileges**.
+- Automate it from update scripts with `occ announcement_banner:create`.]]></description>
+	<version>1.0.0</version>
+	<licence>agpl</licence>
+	<author homepage="https://github.com/BurgiSimon">BurgiSimon</author>
+	<namespace>AnnouncementBanner</namespace>
+	<category>dashboard</category>
+	<category>organization</category>
+	<website>https://github.com/BurgiSimon/nextcloud-announcement-banner</website>
+	<bugs>https://github.com/BurgiSimon/nextcloud-announcement-banner/issues</bugs>
+	<repository type="git">https://github.com/BurgiSimon/nextcloud-announcement-banner.git</repository>
+	<screenshot>https://raw.githubusercontent.com/BurgiSimon/nextcloud-announcement-banner/main/screenshots/dashboard.png</screenshot>
+	<screenshot>https://raw.githubusercontent.com/BurgiSimon/nextcloud-announcement-banner/main/screenshots/admin.png</screenshot>
+	<dependencies>
+		<php min-version="8.2"/>
+		<nextcloud min-version="34" max-version="35"/>
+	</dependencies>
+	<commands>
+		<command>OCA\AnnouncementBanner\Command\Create</command>
+		<command>OCA\AnnouncementBanner\Command\ListAnnouncements</command>
+		<command>OCA\AnnouncementBanner\Command\Delete</command>
+	</commands>
+	<settings>
+		<admin>OCA\AnnouncementBanner\Settings\AdminSettings</admin>
+		<admin-section>OCA\AnnouncementBanner\Settings\AdminSection</admin-section>
+	</settings>
+</info>

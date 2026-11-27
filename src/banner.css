@@ -1,0 +1,159 @@
+/**
+ * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * The banner sits between the Dashboard greeting and the widgets, over the background
+ * image, so each item is drawn like a Dashboard panel (blurred main background, large
+ * radius) with the type's colour as an accent. Only server theme variables are used,
+ * which makes it follow light, dark and high-contrast themes on its own.
+ */
+
+.announcement-banner {
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--default-grid-baseline, 4px) * 2);
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 760px;
+	margin: 0 auto calc(var(--default-grid-baseline, 4px) * 6);
+	padding: 0 16px;
+}
+
+.announcement-banner__item {
+	/* --color-<type> is a pale background tint in Nextcloud 34+; the element colour is the
+	   strong one, and the text colour is the one guaranteed readable as text. */
+	--announcement-accent: var(--color-element-info, var(--color-info-text));
+	--announcement-accent-text: var(--color-info-text, var(--color-info));
+	display: flex;
+	align-items: flex-start;
+	gap: calc(var(--default-grid-baseline, 4px) * 3);
+	box-sizing: border-box;
+	padding: calc(var(--default-grid-baseline, 4px) * 3) calc(var(--default-grid-baseline, 4px) * 3)
+		calc(var(--default-grid-baseline, 4px) * 3) calc(var(--default-grid-baseline, 4px) * 4);
+	border: 1px solid var(--color-border, transparent);
+	border-inline-start: 6px solid var(--announcement-accent);
+	border-radius: var(--border-radius-container-large, var(--border-radius-large, 12px));
+	background-color: var(--color-main-background-blur, var(--color-main-background));
+	backdrop-filter: var(--filter-background-blur, none);
+	color: var(--color-main-text);
+	text-align: start;
+	transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.announcement-banner__item--success {
+	--announcement-accent: var(--color-element-success, var(--color-success-text));
+	--announcement-accent-text: var(--color-success-text, var(--color-success));
+}
+
+.announcement-banner__item--warning {
+	--announcement-accent: var(--color-element-warning, var(--color-warning-text));
+	--announcement-accent-text: var(--color-warning-text, var(--color-warning));
+}
+
+.announcement-banner__item--error {
+	--announcement-accent: var(--color-element-error, var(--color-error-text));
+	--announcement-accent-text: var(--color-error-text, var(--color-error));
+}
+
+.announcement-banner__item--leaving {
+	opacity: 0;
+	transform: translateY(-4px);
+}
+
+.announcement-banner__icon {
+	flex: 0 0 auto;
+	width: 24px;
+	height: 24px;
+	margin-top: 2px;
+	fill: var(--announcement-accent);
+}
+
+.announcement-banner__body {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+/* The Dashboard's own styles set headings to its greeting look; reset what we use. */
+.announcement-banner .announcement-banner__title {
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 1.5;
+	color: var(--color-main-text);
+	text-align: start;
+	overflow-wrap: anywhere;
+}
+
+.announcement-banner__message {
+	margin: 2px 0 0;
+	line-height: 1.5;
+	white-space: pre-line;
+	overflow-wrap: anywhere;
+}
+
+.announcement-banner__link {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	margin-top: calc(var(--default-grid-baseline, 4px) * 1);
+	font-weight: bold;
+	color: var(--announcement-accent-text);
+	text-decoration: underline;
+}
+
+.announcement-banner__link:focus-visible {
+	outline: 2px solid var(--color-main-text);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+.announcement-banner__link-icon {
+	width: 16px;
+	height: 16px;
+	fill: currentColor;
+}
+
+.announcement-banner .announcement-banner__close {
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--default-clickable-area, 34px);
+	height: var(--default-clickable-area, 34px);
+	min-height: 0;
+	margin: -4px -4px 0 0;
+	padding: 0;
+	border: none;
+	border-radius: var(--border-radius-element, 50%);
+	background: transparent;
+	color: var(--color-main-text);
+	cursor: pointer;
+}
+
+.announcement-banner .announcement-banner__close:hover,
+.announcement-banner .announcement-banner__close:focus-visible {
+	background-color: var(--color-background-hover);
+}
+
+.announcement-banner .announcement-banner__close:focus-visible {
+	outline: 2px solid var(--color-main-text);
+	outline-offset: -2px;
+}
+
+.announcement-banner .announcement-banner__close:disabled {
+	cursor: wait;
+	opacity: 0.5;
+}
+
+.announcement-banner__close-icon {
+	width: 20px;
+	height: 20px;
+	fill: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.announcement-banner__item {
+		transition: none;
+	}
+}
