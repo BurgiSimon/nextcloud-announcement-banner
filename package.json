@@ -15,7 +15,7 @@
     "devDependencies": {
         "@nextcloud/browserslist-config": "^3.1.2",
         "@nextcloud/vite-config": "^2.5.4",
-        "@playwright/test": "^1.62.1",
+        "@playwright/test": "^1.65.1",
         "typescript": "^5.9.3",
         "vite": "^7.3.7"
     },
@@ -25,8 +25,8 @@
         "@nextcloud/axios": "^2.6.0",
         "@nextcloud/initial-state": "^3.0.0",
         "@nextcloud/l10n": "^3.4.1",
-        "@nextcloud/router": "^3.1.0",
-        "@nextcloud/vue": "^9.9.0",
+        "@nextcloud/router": "^3.2.0",
+        "@nextcloud/vue": "^9.14.1",
         "vue": "^3.5.41"
     },
     "engines": {
