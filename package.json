@@ -16,7 +16,7 @@
         "@nextcloud/browserslist-config": "^3.1.2",
         "@nextcloud/vite-config": "^2.5.4",
         "@playwright/test": "^1.62.1",
-        "typescript": "^5.9.3",
+        "typescript": "^7.0.2",
         "vite": "^7.3.7"
     },
     "type": "module",
